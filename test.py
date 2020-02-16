@@ -8,6 +8,8 @@ arcade.set_background_color(arcade.color.BLIZZARD_BLUE)
 
 arcade.start_render()
 
+arcade.draw_circle_filled(900, 500, 70, arcade.color.RED)
+
 arcade.draw_circle_filled(900, 500, 60, arcade.color.GREEN)
 
 arcade.finish_render()
