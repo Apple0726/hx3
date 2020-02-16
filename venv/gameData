@@ -1,0 +1,256 @@
+plantInfo = {	leadPlant:{idt:"leadPlant", time:3600000, products:["lead"], needs:["H2O"]},
+					ironPlant:{idt:"ironPlant", time:5400000, products:["iron"], needs:["H2O"]},
+					conductivePlant:{idt:"conductivePlant", time:7200000, products:["copper", "silver", "gold"], needs:["H2O", "N", "O"]}};
+	frontCs = {	laser1:{idt:"laser1", type:"laser", name:lg("Red laser", "Laser rouge"), dmg:5, cooldown:0, maluses:lg("-20% damage to armor", "-20% de dégâts à l'armure"), bonuses:lg("30% chance to blind enemies for 1 turn", "30% de chance d'aveugler les ennemis pendant 1 tour"), acc:1.2, money:new BigNum(2, 2), stone:new BigNum(5, 1), materials:{glass:new BigNum(5, 1)}, draw:new BigNum(1, 4)},
+				laser2:{idt:"laser2", type:"laser", name:lg("Green laser", "Laser vert"), dmg:14, cooldown:0, maluses:lg("-20% damage to armor", "-20% de dégâts à l'armure"), bonuses:lg("40% chance to blind enemies for 1 turn", "40% de chance d'aveugler les ennemis pendant 1 tour"), acc:1.25, money:new BigNum(2.8, 3), stone:new BigNum(5, 1), materials:{glass:new BigNum(2.5, 2)}, draw:new BigNum(5, 4)},
+				laser3:{idt:"laser3", type:"laser", name:lg("Blue laser", "Laser bleu"), dmg:70, cooldown:0, maluses:lg("-20% damage to armor", "-20% de dégâts à l'armure"), bonuses:lg("50% chance to blind enemies for 1 turn", "50% de chance d'aveugler les ennemis pendant 1 tour"), acc:1.3, money:new BigNum(7.8, 4), stone:new BigNum(5, 1), materials:{glass:new BigNum(1, 3)}, draw:new BigNum(8.5, 5)},
+				laser4:{idt:"laser4", type:"laser", name:lg("UV laser", "Laser UV"), dmg:900, cooldown:0, maluses:lg("-20% damage to armor", "-20% de dégâts à l'armure"), bonuses:lg("30% chance to blind enemies for 2 turns", "30% de chance d'aveugler les ennemis pendant 2 tours"), acc:1.35, money:new BigNum(1.05, 7), stone:new BigNum(5, 1), materials:{glass:new BigNum(2, 3)}, draw:new BigNum(2, 7)},
+				laser5:{idt:"laser5", type:"laser", name:lg("X-ray laser", "Laser rayon-X"), dmg:12000, cooldown:0, maluses:lg("-20% damage to armor", "-20% de dégâts à l'armure"), bonuses:lg("40% chance to blind enemies for 2 turns", "40% de chance d'aveugler les ennemis pendant 2 tours"), acc:1.4, money:new BigNum(1.5, 10), stone:new BigNum(5, 1), materials:{glass:new BigNum(3, 3)}, draw:new BigNum(4.5, 9)},
+				laser6:{idt:"laser6", type:"laser", name:lg("Gamma ray laser", "Laser rayon gamma"), dmg:1400000, cooldown:0, maluses:lg("-20% damage to armor", "-20% de dégâts à l'armure"), bonuses:lg("50% chance to blind enemies for 2 turns", "50% de chance d'aveugler les ennemis pendant 2 tours"), acc:1.45, money:new BigNum(1, 15), stone:new BigNum(5, 1), materials:{glass:new BigNum(5, 3)}, particles:{electron:new BigNum(5, 6)}, draw:new BigNum(5, 12)},
+				plasma1:{idt:"plasma1", type:"plasma", name:lg("Plasma emitter", "Emetteur de plasma"), dmg:50, cooldown:1, bonuses:lg("+50% damage to armor\n+100% damage to shields", "+50% de dégâts à l'armure\n+100% de dégâts aux boucliers"), acc:0.85, money:new BigNum(9, 4), stone:new BigNum(1.5, 2), stableMetals:{tungsten:new BigNum(5, 0)}, draw:new BigNum(8, 5)},
+				plasma2:{idt:"plasma2", type:"plasma", name:lg("Superheated plasma emitter", "Emetteur de plasma surchauffé"), dmg:9000, cooldown:1, bonuses:lg("+100% damage to armor\n+200% damage to shields", "+100% de dégâts à l'armure\n+200% de dégâts aux boucliers"), acc:0.85, money:new BigNum(4, 10), stone:new BigNum(7.5, 2), stableMetals:{adamantite:new BigNum(5, 0)}, draw:new BigNum(5, 9)},
+				plasma3:{idt:"plasma3", type:"plasma", name:lg("Quark-gluon plasma emitter", "Emetteur de plasma quark-gluon"), dmg:1000000, cooldown:1, bonuses:lg("+200% damage to armor\n+400% damage to shields", "+200% de dégâts à l'armure\n+400% de dégâts aux boucliers"), acc:0.85, money:new BigNum(1, 16), stone:new BigNum(5, 3), materials:{neutronium:new BigNum(5, 2)}, draw:new BigNum(7, 12)},
+				bomb1:{idt:"bomb1", type:"bomb", name:lg("Rocket launcher", "Lanceur de fusée"), dmg:9, cooldown:0, bonuses:lg("Inflicts radiation", "Inflige radiation"), acc:0.7, money:new BigNum(2.5, 2), stone:new BigNum(2, 2), unstableMetals:{uranium:new BigNum(1, 1)}, draw:new BigNum(5, 3)},
+				bomb2:{idt:"bomb2", type:"bomb", name:lg("Nuclear missile launcher", "Lanceur de missile nucléaire"), dmg:27, cooldown:0, bonuses:lg("Inflicts radiation", "Inflige radiation"), acc:0.7, money:new BigNum(3.2, 3), stone:new BigNum(8, 2), unstableMetals:{uranium:new BigNum(5, 1)}, draw:new BigNum(2.5, 4)},
+				bomb3:{idt:"bomb3", type:"bomb", name:lg("Atomic bomb launcher", "Lanceur de bombe atomique"), dmg:150, cooldown:0, bonuses:lg("Inflicts radiation", "Inflige radiation"), acc:0.75, money:new BigNum(9, 4), stone:new BigNum(2, 3), unstableMetals:{uranium:new BigNum(2, 2)}, draw:new BigNum(6, 5)},
+				bomb4:{idt:"bomb4", type:"bomb", name:lg("Hydrogen bomb launcher", "Lanceur de bombe à hydrogène"), dmg:2000, cooldown:0, bonuses:lg("Inflicts radiation", "Inflige radiation"), acc:0.75, money:new BigNum(1.2, 7), stone:new BigNum(5, 3), unstableMetals:{uranium:new BigNum(4, 2)}, atoms:{H:new BigNum(1, 8)}, draw:new BigNum(1.5, 7)},
+				bomb5:{idt:"bomb5", type:"bomb", name:lg("Electron bomb launcher", "Lanceur de bombe à électrons"), dmg:26000, cooldown:0, bonuses:lg("Inflicts radiation", "Inflige radiation"), acc:0.8, money:new BigNum(2.5, 10), stone:new BigNum(1, 2), particles:{electron:new BigNum(1, 6)}, draw:new BigNum(8, 9)},
+				bomb6:{idt:"bomb6", type:"bomb", name:lg("Positron bomb launcher", "Lanceur de bombe à positrons"), dmg:4000000, cooldown:0, bonuses:lg("Inflicts radiation", "Inflige radiation"), acc:0.8, money:new BigNum(2, 15), stone:new BigNum(1, 2), particles:{electron:new BigNum(1, 11)}, draw:new BigNum(1.2, 13)},
+				torpedo1:{idt:"torpedo1", type:"torpedo", name:lg("Torpedoes", "Torpilles"), dmg:180, cooldown:2, bonuses:lg("Stuns enemies for 5 seconds", "Paralyse les ennemis pendant 5 secondes"), acc:1, money:new BigNum(3.5, 5), stone:new BigNum(1, 3), unstableMetals:{plutonium:new BigNum(1, 3)}, draw:new BigNum(3.5, 5), travel:-2},
+				torpedo2:{idt:"torpedo2", type:"torpedo", name:lg("Quantum torpedoes", "Torpilles quantiques"), dmg:35000, cooldown:2, bonuses:lg("Stuns enemies for 10 seconds", "Paralyse les ennemis pendant 10 secondes"), acc:1, money:new BigNum(2, 11), stone:new BigNum(1, 4), unstableMetals:{plutonium:new BigNum(1, 6)}, draw:new BigNum(1.8, 11), travel:-10},
+				torpedo3:{idt:"torpedo3", type:"torpedo", name:lg("Antimatter torpedoes", "Torpilles à antimatière"), dmg:8000000, cooldown:2, bonuses:lg("Stuns enemies for 15 seconds", "Paralyse les ennemis pendant 15 secondes"), acc:1, money:new BigNum(7.5, 16), stone:new BigNum(1, 5), unstableMetals:{plutonium:new BigNum(1, 8)}, particles:{electron:new BigNum(5, 7)}, draw:new BigNum(5, 13), travel:-50}};
+	frontCsA = [frontCs.laser1, frontCs.laser2, frontCs.laser3, frontCs.laser4, frontCs.laser5, frontCs.laser6, frontCs.plasma1, frontCs.plasma2, frontCs.plasma3, frontCs.bomb1, frontCs.bomb2, frontCs.bomb3, frontCs.bomb4, frontCs.bomb5, frontCs.bomb6, frontCs.torpedo1, frontCs.torpedo2, frontCs.torpedo3];
+
+	centerCs = {	shield1:{idt:"shield1", name:lg("Energy shield", "Boucliers à énergie"), sp:15, bonuses:lg("Immune to status effects if shield points are above 0", "Immunisé contre les effets de statut si les points de bouclier sont supérieurs à 0"), money:new BigNum(1.5, 2), draw:new BigNum(1, 4)},
+					shield2:{idt:"shield2", name:lg("Superconductive energy shield", "Boucliers à énergie superconductive"), sp:80, bonuses:lg("Immune to status effects if shield points are above 0", "Immunisé contre les effets de statut si les points de bouclier sont supérieurs à 0"), money:new BigNum(1.4, 3), draw:new BigNum(1, 5)},
+					shield3:{idt:"shield3", name:lg("Ionized energy shield", "Boucliers à énergie ionisée"), sp:900, bonuses:lg("Immune to status effects if shield points are above 0", "Immunisé contre les effets de statut si les points de bouclier sont supérieurs à 0"), money:new BigNum(5, 4), draw:new BigNum(1.8, 6)},
+					shield4:{idt:"shield4", name:lg("Electron shield", "Boucliers à électrons"), sp:14000, bonuses:lg("Immune to status effects if shield points are above 0", "Immunisé contre les effets de statut si les points de bouclier sont supérieurs à 0"), money:new BigNum(5, 6), draw:new BigNum(8, 7)},
+					shield5:{idt:"shield5", name:lg("Dark energy shield", "Boucliers à énergie noire"), sp:500000, bonuses:lg("Immune to status effects if shield points are above 0", "Immunisé contre les effets de statut si les points de bouclier sont supérieurs à 0"), money:new BigNum(4, 9), draw:new BigNum(2, 9)},
+					shield6:{idt:"shield6", name:lg("Planck shield", "Boucliers Planck"), sp:30000000, bonuses:lg("Immune to status effects if shield points are above 0", "Immunisé contre les effets de statut si les points de bouclier sont supérieurs à 0"), money:new BigNum(6, 14), draw:new BigNum(1.5, 12)},
+					armor1:{idt:"armor1", name:lg("Aluminium armor", "Armure en aluminium"), ap:30, money:new BigNum(1.5, 2), stone:new BigNum(4, 2), stableMetals:{aluminium:new BigNum(8, 1)}, draw:new BigNum(0, 0)},
+					armor2:{idt:"armor2", name:lg("Osmium armor", "Armure en osmium"), ap:160, money:new BigNum(1.4, 3), stone:new BigNum(4, 2), stableMetals:{osmium:new BigNum(5, 1)}, draw:new BigNum(0, 0)},
+					armor3:{idt:"armor3", name:lg("Titanium armor", "Armure en titane"), ap:1800, money:new BigNum(5, 4), stone:new BigNum(4, 2), stableMetals:{titanium:new BigNum(7.5, 1)}, draw:new BigNum(0, 0)},
+					armor4:{idt:"armor4", name:lg("Mythril armor", "Armure en mythril"), ap:28000, money:new BigNum(5, 6), stone:new BigNum(4, 2), stableMetals:{mythril:new BigNum(1, 2)}, draw:new BigNum(0, 0)},
+					armor5:{idt:"armor5", name:lg("Neutronium armor", "Armure en neutronium"), ap:1000000, money:new BigNum(4, 9), stone:new BigNum(4, 2), materials:{neutronium:new BigNum(1, 3)}, draw:new BigNum(0, 0)},
+					armor6:{idt:"armor6", name:lg("Antineutronium armor", "Armure en antineutronium"), ap:60000000, money:new BigNum(6, 14), stone:new BigNum(4, 2), materials:{neutronium:new BigNum(1, 6)}, particles:{electron:new BigNum(1, 7)}, draw:new BigNum(0, 0)},
+					reactor1:{idt:"reactor1", name:lg("Fission reactor", "Réacteur à fission"), supply:new BigNum(5, 4), money:new BigNum(1, 2), stone:new BigNum(2, 2), stableMetals:{iron:new BigNum(1, 2)}},
+					reactor2:{idt:"reactor2", name:lg("Fusion reactor", "Réacteur à fusion"), supply:new BigNum(4, 5), money:new BigNum(1.6, 3), stone:new BigNum(2, 2), stableMetals:{platinum:new BigNum(2, 1)}},
+					reactor3:{idt:"reactor3", name:lg("Cold fusion reactor", "Réacteur à fusion froide"), supply:new BigNum(3, 6), money:new BigNum(7.5, 4), stone:new BigNum(2, 2), stableMetals:{nanocrystal:new BigNum(5, 1)}},
+					reactor4:{idt:"reactor4", name:lg("Muon reactor", "Réacteur à muons"), supply:new BigNum(4, 8), money:new BigNum(8.5, 6), stone:new BigNum(2, 2), particles:{electron:new BigNum(1, 4)}},
+					reactor5:{idt:"reactor5", name:lg("Neutrino reactor", "Réacteur à neutrinos"), supply:new BigNum(3, 10), money:new BigNum(1, 10), stone:new BigNum(2, 2), particles:{proton:new BigNum(1, 6), electron:new BigNum(1, 6)}},
+					reactor6:{idt:"reactor6", name:lg("Supernova reactor", "Réacteur supernova"), supply:new BigNum(1, 13), money:new BigNum(2.5, 15), stone:new BigNum(2, 2), stableMetals:{urilite:new BigNum(1, 2)}, particles:{proton:new BigNum(1, 10), electron:new BigNum(1, 10)}},
+					atk1:{idt:"atk1", name:lg("Attack boost I", "Boost d'attaque I"), atkB:1.25, bonuses:lg("Increases damage by 25%", "Augmente les dégâts de 25%"), money:new BigNum(3, 2), stone:new BigNum(5, 2), draw:new BigNum(0, 0)},
+					atk2:{idt:"atk2", name:lg("Attack boost II", "Boost d'attaque II"), atkB:1.5, bonuses:lg("Increases damage by 50%", "Augmente les dégâts de 50%"), money:new BigNum(3, 7), stone:new BigNum(1, 3), draw:new BigNum(0, 0)},
+					atk3:{idt:"atk3", name:lg("Attack boost III", "Boost d'attaque III"), atkB:2, bonuses:lg("Increases damage by 100%", "Augmente les dégâts de 100%"), money:new BigNum(3, 15), stone:new BigNum(2, 3), draw:new BigNum(0, 0)},
+					def1:{idt:"def1", name:lg("Defense boost I", "Boost de défense I"), defB:1.1, bonuses:lg("Reduces damage by 10%", "Diminue les dégâts de 10%"), money:new BigNum(6, 2), stone:new BigNum(5, 2), draw:new BigNum(0, 0)},
+					def2:{idt:"def2", name:lg("Defense boost II", "Boost de défense II"), defB:1.2, bonuses:lg("Reduces damage by 20%", "Diminue les dégâts de 20%"), money:new BigNum(6, 7), stone:new BigNum(1, 3), draw:new BigNum(0, 0)},
+					def3:{idt:"def3", name:lg("Defense boost III", "Boost de défense III"), defB:1.4, bonuses:lg("Reduces damage by 40%", "Diminue les dégâts de 40%"), money:new BigNum(6, 15), stone:new BigNum(2, 3), draw:new BigNum(0, 0)},
+					acc1:{idt:"acc1", name:lg("Accuracy boost I", "Boost de précision I"), accB:1.2, bonuses:lg("Increases &acc by 20%", "Augmente &acc de 20%"), money:new BigNum(6, 2), stone:new BigNum(5, 2), draw:new BigNum(0, 0)},
+					acc2:{idt:"acc2", name:lg("Accuracy boost II", "Boost de précision II"), accB:1.4, bonuses:lg("Increases &acc by 40%", "Augmente &acc de 40%"), money:new BigNum(6, 7), stone:new BigNum(1, 3), draw:new BigNum(0, 0)},
+					acc3:{idt:"acc3", name:lg("Accuracy boost III", "Boost de précision III"), accB:1.8, bonuses:lg("Increases &acc by 80%", "Augmente &acc de 80%"), money:new BigNum(6, 15), stone:new BigNum(2, 3), draw:new BigNum(0, 0)},
+					eva1:{idt:"eva1", name:lg("Evade boost I", "Boost d'esquive I"), evaB:1.1, bonuses:lg("Increases evade by 10%", "Augmente l'esquive de 10%"), money:new BigNum(6, 2), stone:new BigNum(5, 2), draw:new BigNum(0, 0)},
+					eva2:{idt:"eva2", name:lg("Evade boost II", "Boost d'esquive II"), evaB:1.2, bonuses:lg("Increases evade by 20%", "Augmente l'esquive de 10%"), money:new BigNum(6, 7), stone:new BigNum(1, 3), draw:new BigNum(0, 0)},
+					eva3:{idt:"eva3", name:lg("Evade boost III", "Boost d'esquive III"), evaB:1.4, bonuses:lg("Increases evade by 40%", "Augmente l'esquive de 10%"), money:new BigNum(6, 15), stone:new BigNum(2, 3), draw:new BigNum(0, 0)}};
+	centerCsA = [centerCs.shield1, centerCs.shield2, centerCs.shield3, centerCs.shield4, centerCs.shield5, centerCs.shield6, centerCs.armor1, centerCs.armor2, centerCs.armor3, centerCs.armor4, centerCs.armor5, centerCs.armor6, centerCs.reactor1, centerCs.reactor2, centerCs.reactor3, centerCs.reactor4, centerCs.reactor5, centerCs.reactor6, centerCs.atk1, centerCs.atk2, centerCs.atk3, centerCs.def1, centerCs.def2, centerCs.def3, centerCs.acc1, centerCs.acc2, centerCs.acc3, centerCs.eva1, centerCs.eva2, centerCs.eva3];
+
+	backCs = {	thruster1:{idt:"thruster1", name:lg("Thruster I", "Propulseur I"), money:new BigNum(1, 2), stone:new BigNum(2, 2), travel:1, draw:new BigNum(5, 3)},
+				thruster2:{idt:"thruster2", name:lg("Thruster II", "Propulseur II"), money:new BigNum(1.5, 3), stone:new BigNum(4, 2), travel:2, draw:new BigNum(3.5, 4)},
+				thruster3:{idt:"thruster3", name:lg("Thruster III", "Propulseur III"), money:new BigNum(7.2, 3), stone:new BigNum(8, 2), travel:4, draw:new BigNum(2.5, 5)},
+				thruster4:{idt:"thruster4", name:lg("Thruster IV", "Propulseur IV"), money:new BigNum(8, 6), stone:new BigNum(1.6, 3), travel:8, draw:new BigNum(3, 7)},
+				thruster5:{idt:"thruster5", name:lg("Thruster V", "Propulseur V"), money:new BigNum(9, 9), stone:new BigNum(3.2, 3), travel:16, draw:new BigNum(2.5, 9)},
+				thruster6:{idt:"thruster6", name:lg("Thruster VI", "Propulseur VI"), money:new BigNum(3, 14), stone:new BigNum(6.4, 4), travel:32, draw:new BigNum(4, 11)},
+				advThruster1:{idt:"advThruster1", name:lg("Advanced thruster I", "Propulseur avancé I"), evaB:1.05, bonuses:lg("Increases &eva by 5%", "Augmente &eva de 5%"), money:new BigNum(2, 2), stone:new BigNum(5, 2), travel:2, draw:new BigNum(2.5, 4)},
+				advThruster2:{idt:"advThruster2", name:lg("Advanced thruster II", "Propulseur avancé II"), evaB:1.05, bonuses:lg("Increases evade by 5%", "Augmente l'esquive de 5%"), money:new BigNum(2, 2), stone:new BigNum(1, 3), travel:4, draw:new BigNum(1.75, 5)},
+				advThruster3:{idt:"advThruster3", name:lg("Advanced thruster III", "Propulseur avancé III"), evaB:1.1, bonuses:lg("Increases evade by 10%", "Augmente l'esquive de 10%"), money:new BigNum(2, 2), stone:new BigNum(2, 3), travel:8, draw:new BigNum(1.2, 6)},
+				advThruster4:{idt:"advThruster4", name:lg("Advanced thruster IV", "Propulseur avancé IV"), evaB:1.1, bonuses:lg("Increases evade by 10%", "Augmente l'esquive de 10%"), money:new BigNum(2, 2), stone:new BigNum(4, 3), travel:16, draw:new BigNum(1.5, 8)},
+				advThruster5:{idt:"advThruster5", name:lg("Advanced thruster V", "Propulseur avancé V"), evaB:1.15, bonuses:lg("Increases evade by 15%", "Augmente l'esquive de 15%"), money:new BigNum(2, 2), stone:new BigNum(8, 3), travel:32, draw:new BigNum(1.2, 10)},
+				advThruster6:{idt:"advThruster6", name:lg("Advanced thruster VI", "Propulseur avancé VI"), evaB:1.15, bonuses:lg("Increases evade by 15%", "Augmente l'esquive de 15%"), money:new BigNum(2, 2), stone:new BigNum(1.6, 4), travel:64, draw:new BigNum(2, 12)}};
+	backCsA = [backCs.thruster1, backCs.thruster2, backCs.thruster3, backCs.thruster4, backCs.thruster5, backCs.thruster6, backCs.advThruster1, backCs.advThruster2, backCs.advThruster3, backCs.advThruster4, backCs.advThruster5, backCs.advThruster6];
+
+	items = {	speedup1:{type:"one-use", subType:"speedup", idt:"speedup1", name:lg("Speed-up I", "Accélération I"), desc:lg("Speeds up building construction by 3 minutes", "Accélère la construction d'un bâtiment de 3 minutes"), speedup:180, cost:new BigNum(5, 2)},
+				speedup2:{type:"one-use", subType:"speedup", idt:"speedup2", name:lg("Speed-up II", "Accélération II"), desc:lg("Speeds up building construction by 15 minutes", "Accélère la construction d'un bâtiment de 15 minutes"), speedup:900, cost:new BigNum(2.3, 3)},
+				speedup3:{type:"one-use", subType:"speedup", idt:"speedup3", name:lg("Speed-up III", "Accélération III"), desc:lg("Speeds up building construction by 1 hour", "Accélère la construction d'un bâtiment d'une heure"), speedup:3600, cost:new BigNum(8.9, 3)},
+				speedup4:{type:"one-use", subType:"speedup", idt:"speedup4", name:lg("Speed-up IV", "Accélération IV"), desc:lg("Speeds up building construction by 4 hours", "Accélère la construction d'un bâtiment de 4 heures"), speedup:14400, cost:new BigNum(3.5, 4)},
+				speedup5:{type:"one-use", subType:"speedup", idt:"speedup5", name:lg("Speed-up V", "Accélération V"), desc:lg("Speeds up building construction by 24 hours", "Accélère la construction d'un bâtiment de 24 heures"), speedup:86400, cost:new BigNum(2, 5)},
+				leadSeeds:{type:"seeds", idt:"leadSeeds", name:lg("Lead berry seeds", "Graines de baie à plomb"), desc:lg("Grow lead by watering H2O\nMaturity time: 1 hour","Cultiver du plomb en arrosant avec H2O\nTemps de maturité: 1 heure"), cost:new BigNum(1, 2), product:"leadPlant"},
+			    ironSeeds:{type:"seeds", idt:"ironSeeds", name:lg("Iron berry seeds", "Graines de baie à fer"), desc:lg("Grow iron by watering H2O\nMaturity time: 1 hour 30 minutes","Cultiver du fer en arrosant avec H2O\nTemps de maturité: 1 heure 30 minutes"), cost:new BigNum(2, 2), product:"ironPlant"},
+				conductiveSeeds:{type:"seeds", idt:"conductiveSeeds", name:lg("Conductive berry seeds", "Graines de baie conductive"), desc:lg("Grow copper by watering H2O\nGrow silver by watering liquid nitrogen\nGrow gold by watering liquid oxygen\nMaturity time: 2 hours","Cultiver du cuivre en arrosant avec H2O\nCultiver de l'argent en arrosant avec l'azote liquide\nCultiver de l'or en arrosant avec l'oxygène liquide\nTemps de maturité: 2 heures"), cost:new BigNum(3.5, 2), product:"conductivePlant"}};
+	itemsA = [items.speedup1, items.speedup2, items.speedup3, items.speedup4, items.speedup5, items.leadSeeds, items.ironSeeds, items.conductiveSeeds];
+	materials = {	coal:{name:lg("Coal", "Charbon"), desc:lg("Can be converted to energy", "Peut être converti en énergie"), vi:"co"},//vi = visual icon
+					glass:{name:lg("Glass", "Verre"), desc:lg("A key material in building structures", "Un matériau clé á la construction des bâtiments"), vi:"gl"},
+					clay:{name:lg("Clay", "Argile"), desc:lg("Some buildings need clay for construction", "Certains bâtiments nécessitent de l'argile pour leur construction"), vi:"cl"},
+					soil:{name:lg("Soil", "Terre"), desc:lg("Plant seeds!", "Plante des graines!"), vi:"so"},
+					sand:{name:lg("Sand", "Sable"), desc:lg("Used to create glass", "Utilisé pour fabriquer le verre"), vi:"sa"},
+					neutronium:{name:lg("Neutronium", "Neutronium"), desc:lg("A rare material used for ship components", "Un matériau rare utilisé pour les composants des vaisseaux"), vi:"ne"},
+					cellulose:{name:lg("Cellulose", "Cellulose"), desc:lg("Cellulose makes seeds come to life. You need these to buy seeds from the shop.", "La cellulose rend les graines vivantes. Tu en auras besoin pour acheter des graines dans la boutique."), vi:"ce"}};
+
+	antiMaterials = {	coal:{name:lg("Anticoal", "Anticharbon"), desc:lg("Can be converted into lots of energy", "Peut être converti en beaucoup d'énergie")},
+						glass:{name:lg("Antiglass", "Antiverre"), desc:lg("A key material in building high-tech structures", "Un élément clé en construction des bâtiments high-tech")},
+						clay:{name:lg("Anticlay", "Anti-argile"), desc:lg("Some peculiar buildings need anticlay for construction", "Certains bâtiments très particuliers nécessitent de l'anti-argile pour leur construction")},
+						soil:{name:lg("Antisoil", "Antiterre"), desc:lg("Plant antiplants!", "Plante des antiplantes!")},
+						sand:{name:lg("Antisand", "Antisable"), desc:lg("Used to create antiglass", "Utilisé pour fabriquer l'antiverre")},
+						neutronium:{name:lg("Antineutronium", "Antineutronium"), desc:lg("An extremely rare material used for ship components", "Un matériau extrêmement rare utilisé pour les composants des vaisseaux")},
+						cellulose:{name:lg("Anticellulose", "Anticellulose"), desc:lg("Anticellulose turns seed matter into antimatter. You need these to buy antiseeds from the shop.", "La cellulose convertit les graines en antimatière. Tu en auras besoin pour acheter des antigraines dans la boutique.")}};
+	//															Rarity 0 = found everywhere, 1 = everywhere except first system etc.
+	stableMetals =  {		lead:{name:lg("Lead", "Plomb"), type:"ordinary", value:new BigNum(1, 0), atoms:{Pb:1}, rarity:0, desc:lg("Make the most basic stuff with lead", "Tu peux fabriquer des trucs de base avec ça")},
+							iron:{name:lg("Iron", "Fer"), type:"ordinary", value:new BigNum(1.4, 0), atoms:{Fe:1}, rarity:0, desc:lg("Iron is good for pretty much everything", "Le fer il est utile partout")},
+							copper:{name:lg("Copper", "Cuivre"), type:"ordinary", value:new BigNum(2, 0), atoms:{Cu:1}, rarity:0, desc:lg("Slightly more valuable than iron (at least in this game)", "Un poil plus précieux que le fer (dans ce jeu au moins)")},
+							aluminium:{name:lg("Aluminium", "Aluminium"), type:"ordinary", value:new BigNum(3, 0), atoms:{Al:1}, rarity:0, desc:lg("A lightweight metal used for a variety of lightweight things", "Un métal léger utilisé pour fabriquer des trucs légers")},
+							silver:{name:lg("Silver", "Argent"), type:"ordinary", value:new BigNum(5, 0), atoms:{Ag:1}, rarity:0, desc:lg("The grey version of gold", "C'est de l'or, mais coloré en gris")},
+							gold:{name:lg("Gold", "Or"), type:"ordinary", value:new BigNum(1, 1), atoms:{Au:1}, rarity:0, desc:lg("Soft but heavy at the same time", "A la fois doux et lourd")},
+							amethyst:{name:lg("Amethyst", "Améthyste"), type:"ordinary", value:new BigNum(2, 1), atoms:{Si:1, O:2}, rarity:0, desc:lg("Kind and loving", "Un métal de gentillesse et d'amour")},
+							emerald:{name:lg("Emerald", "Emeraude"), type:"ordinary", value:new BigNum(3.6, 1), atoms:{Be:3, Al:2, Si:6, O:18}, rarity:0, desc:lg("Part of the beryl family", "Une variété de béryl")},
+							quartz:{name:lg("Quartz", "Quartz"), type:"ordinary", value:new BigNum(5.5, 1), atoms:{Si:1, O:2}, rarity:0, desc:lg("Magically causes plants to grow faster","Les plantes grandissent plus vite avec ce métal. Magie?")},
+							topaz:{name:lg("Topaz", "Topaze"), type:"ordinary", value:new BigNum(7.5, 1), atoms:{Al:2, Si:1, O:6, F:2, H:2}, rarity:0, desc:lg("The friendliest metal ever", "Le métal le plus sympathique")},
+							ruby:{name:lg("Ruby", "Rubis"), type:"ordinary", value:new BigNum(1, 2), atoms:{Al:2, O:3, Cr:1}, rarity:0, desc:lg("The world's first functional laser used a synthetic ruby", "Le premier laser du monde utilisait un rubis synthétique")},
+							sapphire:{name:lg("Sapphire", "Saphir"), type:"ordinary", value:new BigNum(1.3, 2), atoms:{Al:2, O:3}, rarity:0, desc:lg("Wearing this on your smallest finger will boost your reproductive system", "Si tu portes ça sur ton petit doigt, ton système reproductif va être... plus efficace")},
+							osmium:{name:lg("Osmium", "Osmium"), type:"ordinary", value:new BigNum(2.2, 2), atoms:{Os:1}, rarity:0, desc:lg("Platinum's little brother", "Le petit frère du platine")},
+							iridium:{name:lg("Iridium", "Iridium"), type:"ordinary", value:new BigNum(3.1, 2), atoms:{Ir:1}, rarity:0, desc:lg("Not even acid can get through this","Même un acide ne peut pas pénétrer ce métal")},
+							platinum:{name:lg("Platinum", "Platine"), type:"ordinary", value:new BigNum(4.1, 2), atoms:{Pt:1}, rarity:0, desc:lg("Helps fight cancer","Il lutte contre le cancer")},
+							tungsten:{name:lg("Tungsten", "Tungsten"), type:"ordinary", value:new BigNum(5.5, 2), atoms:{W:1}, rarity:0, desc:lg("Can be thrown into the Sun without evaporating","Peut être jeté dans le Soleil sans évaporer")},
+							titanium:{name:lg("Titanium", "Titane"), type:"ordinary", value:new BigNum(8, 2), atoms:{Ti:1}, rarity:0, desc:lg("Can be found in your body","Il y a ça à intérieur de toi!")},
+							diamond:{name:lg("Diamond", "Diamant"), type:"ordinary", value:new BigNum(1.8, 3), atoms:{C:1}, rarity:0, desc:lg("Can only be cut by another diamond", "Ne peut être coupé qu'avec un autre diamant")},
+							nanocrystal:{name:lg("Nanocrystal", "Nanocristal"), type:"semi-legendary", value:new BigNum(1.5, 4), atoms:{Si:1, O:4, Ar:8}, rarity:1, desc:lg("A sorta small crystal","Un petit cristal")},
+							mythril:{name:lg("Mythril", "Mythril"), type:"semi-legendary", value:new BigNum(2.5, 5), atoms:{Se:1, O:8, Rb:4, Cd:6}, rarity:1, desc:lg("If silver and iron had a child", "Ce qu'on obtient si on croise (au sens biologique) un argent avec un fer")},
+							adamantite:{name:lg("Adamantite", "Adamantite"), type:"legendary", value:new BigNum(1, 7), atoms:{Pd:8, Mn:12}, rarity:2, desc:lg("Diamond's nickname","Le surnom du diamant")},
+							tetrium:{name:lg("Tetrium", "Tetrium"), type:"legendary", value:new BigNum(1, 9), atoms:{Rn:1, Kr:1, He:1}, rarity:2, desc:lg("Does this make you think of Tetris?", "Avoue que t'as pensé à Tetris en lisant le nom du métal")},
+							glycostone:{name:lg("Glycostone", "Glycopierre"), type:"legendary", value:new BigNum(1, 11), atoms:{Hf:1, Y:4, C:9, H:18, O:9}, rarity:2, desc:lg("A mysterious metal known for its sweet taste","Un métal mystérieux qui est connu pour son goût sucré")},
+							cytosium:{name:lg("Cytosium", "Cytosium"),type:"legendary",  value:new BigNum(1, 13), atoms:{Pa:2, Bi:2}, rarity:2, desc:lg("Totally not named after cytosine","J'ai pas repris le mot \"cytosine\" pour nommer ce métal. Du tout.")},
+							urilite:{name:lg("Urilite", "Urilite"), type:"legendary", value:new BigNum(1, 15), atoms:{Gd:1, Eu:2}, rarity:2, desc:lg("Has lots of protein", "Contient beaucoup de protéines")},
+							oracle:{name:lg("Oracle", "Oracle"), type:"legendary", value:new BigNum(1, 18), atoms:{No:1, Pa:1, Bi:1, Fr:4}, rarity:3, desc:lg("A very holy metal","Un métal très sacré")},
+							zzyzx:{name:lg("Zzyzx", "Zzyzx"), type:"legendary", value:new BigNum(1, 21), atoms:{Zr:8, Y:1, Zn:8, Xe:1}, rarity:3, desc:lg("Named after an actual place called Zzyzx (pronounced zih-zix) in California","Il y un vrai endroit sur Terre, en Californie, qui s'appelle Zzyzx (prononcé zi-zix)")},
+							jocelyte:{name:lg("Jocelyte", "Jocelyte"), type:"transuniversal", value:new BigNum(1, 42), atoms:{Db:5, Rf:5}, rarity:4, desc:lg("First transuniversal metal ever discovered by and\nnamed after world-famous prodigy Jocelyn Hoog", "Baptisé du nom de Jocelyn Hoog qui a découvert\nle premier métal transuniversel")},
+							luminite:{name:lg("Luminite", "Luminite"), type:"transuniversal", value:new BigNum(1, 84), atoms:{Fl:12, Mt:16, Bh:4}, rarity:5, desc:lg("Emits a very strange glow, somehow","Emet une lueur très bizarre")},
+							exynon:{name:lg("Exynon", "Exynone"), type:"transuniversal", value:new BigNum(1, 168), atoms:{Ds:18, Rg:20}, rarity:7, desc:lg("It tastes sweet, sour, salty and spicy at the same time","A la fois sucré, acide, salé et épicé")},
+							qubilite:{name:lg("Qubilite", "Qubilite"), type:"transuniversal", value:new BigNum(1, 336), atoms:{Ts:8, Nh:2}, rarity:11, desc:lg("If you put this up to your ear, you might hear sounds\ncoming from other universes","Si tu approches ça de ton oreille, tu peux\nentendre des bruits venant des autres univers")},
+							kyrium:{name:lg("Kyrium", "Kyrium"), type:"transuniversal", value:new BigNum(1, 336), atoms:{Og:8, Mc:2}, rarity:11, desc:lg("The metal continuously vibrates, nobody knows why", "Le métal vibre sans arrêt, personne ne sait pourquoi")},
+							triangulum:{name:lg("Triangulum", "Triangulum"), type:"transuniversal", value:new BigNum(1, 1000), atoms:{Og:42, Ts:42, Lv:84, Mc:84}, rarity:28, desc:lg("It has 3 sides", "Il a 3 faces")}};
+	for (var st:String in stableMetals) {
+		stableMetals[st].vi = st.substr(0, 2);
+	}
+	stableMetals["iridium"].vi = "id";
+	stableMetalsA = [[stableMetals.lead, stableMetals.iron, stableMetals.copper, stableMetals.aluminium, stableMetals.silver, stableMetals.gold, stableMetals.amethyst, stableMetals.emerald, stableMetals.quartz, stableMetals.topaz, stableMetals.ruby, stableMetals.sapphire, stableMetals.osmium, stableMetals.iridium, stableMetals.platinum, stableMetals.tungsten, stableMetals.titanium, stableMetals.diamond],
+					 [stableMetals.nanocrystal, stableMetals.mythril],
+					 [stableMetals.adamantite, stableMetals.tetrium, stableMetals.glycostone, stableMetals.cytosium, stableMetals.urilite, stableMetals.oracle],
+					 [stableMetals.jocelyte, stableMetals.luminite, stableMetals.exynon, stableMetals.qubilite, stableMetals.kyrium, stableMetals.triangulum]];
+
+	antiStableMetals =  {		lead:{name:lg("Antilead", "Antiplomb"), type:"ordinary", value:new BigNum(1, 30), atoms:{Pb:1}, rarity:0, desc:lg("Make more interesting basic stuff with antilead", "Tu peux fabriquer des trucs de base, plus intéressants, avec ça")},
+							iron:{name:lg("Anti-iron", "Antifer"), type:"ordinary", value:new BigNum(1, 40), atoms:{Fe:1}, rarity:0, desc:lg("Anti-iron is also good for pretty much everything", "L'antifer aussi il est utile partout")},
+							copper:{name:lg("Anticopper", "Anticuivre"), type:"ordinary", value:new BigNum(1, 50), atoms:{Cu:1}, rarity:0, desc:lg("More valuable than copper. A lot more valuable.", "Plus précieux que le cuivre. Beaucoup plus précieux.")},
+							aluminium:{name:lg("Antialuminium", "Antialuminium"), type:"ordinary", value:new BigNum(1, 60), atoms:{Al:1}, rarity:0, desc:lg("An even more lightweight metal used for a variety of\neven more lightweight things", "Un métal encore plus léger utilisé pour fabriquer\ndes trucs encore plus légers")},
+							silver:{name:lg("Antisilver", "Antiargent"), type:"ordinary", value:new BigNum(1, 70), atoms:{Ag:1}, rarity:0, desc:lg("The darker version of silver", "C'est de l'argent, mais plus foncé")},
+							gold:{name:lg("Antigold", "Anti-or"), type:"ordinary", value:new BigNum(1, 80), atoms:{Au:1}, rarity:0, desc:lg("Soft but heavy at the same time", "A la fois doux et lourd")},
+							amethyst:{name:lg("Antiamethyst", "Antiaméthyste"), type:"ordinary", value:new BigNum(1, 90), atoms:{Si:1, O:2}, rarity:0, desc:lg("Evil and heartless", "Un métal sans coeur")},
+							emerald:{name:lg("Antiemerald", "Antiémeraude"), type:"ordinary", value:new BigNum(1, 100), atoms:{Be:3, Al:2, Si:6, O:18}, rarity:0, desc:lg("Not part of the beryl family", "Pas une variété de béryl")},
+							quartz:{name:lg("Antiquartz", "Antiquartz"), type:"ordinary", value:new BigNum(1, 110), atoms:{Si:1, O:2}, rarity:0, desc:lg("Magically causes antiplants to grow faster","Les antiplantes grandissent plus vite avec ce métal. Pas du tout une magie.")},
+							topaz:{name:lg("Antitopaz", "Antitopaze"), type:"ordinary", value:new BigNum(1, 120), atoms:{Al:2, Si:1, O:6, F:2, H:2}, rarity:0, desc:lg("The meanest metal ever", "Le métal le plus méchant")},
+							ruby:{name:lg("Antiruby", "Antirubis"), type:"ordinary", value:new BigNum(1, 130), atoms:{Al:2, O:3, Cr:1}, rarity:0, desc:lg("The universe's first omega laser used a synthetic antiruby", "Le premier laser omega de l'univers utilisait un antirubis synthétique")},
+							sapphire:{name:lg("Antisapphire", "Antisaphir"), type:"ordinary", value:new BigNum(1, 140), atoms:{Al:2, O:3}, rarity:0, desc:lg("Do not wear this on your smallest finger.", "Ne porte pas ça sur ton petit doigt.")},
+							osmium:{name:lg("Antiosmium", "Antiosmium"), type:"ordinary", value:new BigNum(1, 150), atoms:{Os:1}, rarity:0, desc:lg("Antiplatinum's little brother", "Le petit frère de l'antiplatine")},
+							iridium:{name:lg("Anti-iridium", "Anti-iridium"), type:"ordinary", value:new BigNum(1, 160), atoms:{Ir:1}, rarity:0, desc:lg("Not even antiacid can get through this","Même un antiacide ne peut pas pénétrer ce métal")},
+							platinum:{name:lg("Antiplatinum", "Antiplatine"), type:"ordinary", value:new BigNum(1, 170), atoms:{Pt:1}, rarity:0, desc:lg("Helps fight cancer, and the person too","Il lutte contre le cancer, et contre la personne aussi")},
+							tungsten:{name:lg("Antitungsten", "Antitungsten"), type:"ordinary", value:new BigNum(1, 180), atoms:{W:1}, rarity:0, desc:lg("You will have a hard time melting this thing","Tu n'arriveras jamais à faire fondre ce truc")},
+							titanium:{name:lg("Antititanium", "Antititane"), type:"ordinary", value:new BigNum(1, 190), atoms:{Ti:1}, rarity:0, desc:lg("These might also be in your body","Il y a ça aussi à intérieur de toi, peut-être")},
+							diamond:{name:lg("Antidiamond", "Antidiamant"), type:"ordinary", value:new BigNum(1, 200), atoms:{C:1}, rarity:0, desc:lg("Can only be cut by another antidiamond", "Ne peut être coupé qu'avec un autre antidiamant")},
+							nanocrystal:{name:lg("Antinanocrystal", "Antinanocristal"), type:"semi-legendary", value:new BigNum(1, 250), atoms:{Si:1, O:4, Ar:8}, rarity:1, desc:lg("A sorta small anticrystal","Un petit anticristal")},
+							mythril:{name:lg("Antimythril", "Antimythril"), type:"semi-legendary", value:new BigNum(1, 300), atoms:{Se:1, O:8, Rb:4, Cd:6}, rarity:1, desc:lg("If silver and iron had a corrupt child", "Ce qu'on obtient si on croise mal (au sens biologique) un argent avec un fer")},
+							adamantite:{name:lg("Antiadamantite", "Antiadamantite"), type:"legendary", value:new BigNum(1, 400), atoms:{Pd:8, Mn:12}, rarity:2, desc:lg("Diamond's full name","Le nom complet du diamant")},
+							tetrium:{name:lg("Antitetrium", "Antitetrium"), type:"legendary", value:new BigNum(1, 500), atoms:{Rn:1, Kr:1, He:1}, rarity:2, desc:lg("Maybe this time you didn't think of Tetris", "Peut-être que t'as pas pensé à Tetris cette fois-ci")},
+							glycostone:{name:lg("Antiglycostone", "Antiglycopierre"), type:"legendary", value:new BigNum(1, 600), atoms:{Hf:1, Y:4, C:9, H:18, O:9}, rarity:2, desc:lg("A mysterious metal known for its sweet smell","Un métal mystérieux qui est connu pour son odeur sucrée (odeur sucrée?!)")},
+							cytosium:{name:lg("Anticytosium", "Anticytosium"), type:"legendary", value:new BigNum(1, 700), atoms:{Pa:2, Bi:2}, rarity:2, desc:lg("Does anticytosine exist?","Est-ce que l'\"anticytosine\" existe?")},
+							urilite:{name:lg("Antiurilite", "Antiurilite"), type:"legendary", value:new BigNum(1, 800), atoms:{Gd:1, Eu:2}, rarity:2, desc:lg("Has zero protein", "Ne contient aucune protéine")},
+							oracle:{name:lg("Antioracle", "Antioracle"), type:"legendary", value:new BigNum(1, 900), atoms:{No:1, Pa:1, Bi:1, Fr:4}, rarity:3, desc:lg("A very unholy metal","Un métal très ténébreux")},
+							zzyzx:{name:lg("Antizzyzx", "Antizzyzx"), type:"legendary", value:new BigNum(1, 1000), atoms:{Zr:8, Y:1, Zn:8, Xe:1}, rarity:3, desc:lg("Someone should go create a place called Antizzyzx","Quelqu'un doit aller créer un endroit qui s'appelle Antizzyzx")},
+							jocelyte:{name:lg("Antijocelyte", "Antijocelyte"), type:"transuniversal", value:new BigNum(1, 2000), atoms:{Db:5, Rf:5}, rarity:4, desc:lg("Jocelyn didn't stop her work after discovering jocelyte,\nshe also discovered its antimatter version", "Jocelyn a continué à faire son travail, et elle a fini par\ndécouvrir la version antimatière du jocelyte")},
+							luminite:{name:lg("Antiluminite", "Antiluminite"), type:"transuniversal", value:new BigNum(1, 4000), atoms:{Fl:12, Mt:16, Bh:4}, rarity:5, desc:lg("Emits a dark, red glow, somehow","Emet une lueur rouge très foncée")},
+							exynon:{name:lg("Antiexynon", "Antiexynone"), type:"transuniversal", value:new BigNum(1, 8000), atoms:{Ds:18, Rg:20}, rarity:7, desc:lg("Nobody has tried tasting this metal due to its antimatter nature","Personne n'a essayé de goûter ce métal parce que c'est... de l'antimatière")},
+							qubilite:{name:lg("Antiqubilite", "Antiqubilite"), type:"transuniversal", value:new BigNum(1, 16000), atoms:{Ts:8, Nh:2}, rarity:11, desc:lg("If you put this up to your ear, you might hear\napocalyptic and demonic sounds","Si tu approches ça de ton oreille, tu peux entendre\ndes bruits apocalyptiques et démoniaques")},
+							kyrium:{name:lg("Antikyrium", "Antikyrium"),type:"transuniversal",  value:new BigNum(1, 16000), atoms:{Og:8, Mc:2}, rarity:11, desc:lg("The metal continuously vibrates, nobody knows why", "Le métal vibre sans arrêt, personne ne sait pourquoi")},
+							triangulum:{name:lg("Antitriangulum", "Antitriangulum"), type:"transuniversal", value:new BigNum(1, 50000), atoms:{Og:42, Ts:42, Lv:84, Mc:84}, rarity:28, desc:lg("3 sides...", "3 faces...")}};
+
+	unstableMetals = {	uranium:{idt:"uranium", name:lg("Uranium", "Uranium"), type:"ordinary", value:new BigNum(1, 6), atoms:{U:1}, rarity:0},
+						neptunium:{idt:"neptunium", name:lg("Neptunium", "Neptunium"), type:"ordinary", value:new BigNum(1, 9), atoms:{Np:1}, rarity:0},
+						plutonium:{idt:"plutonium", name:lg("Plutonium", "Plutonium"), type:"ordinary", value:new BigNum(1, 12), atoms:{Pu:1}, rarity:0},
+						americium:{idt:"americium", name:lg("Americium", "Americium"), type:"legendary", value:new BigNum(1, 20), atoms:{Am:1}, rarity:2},
+						curium:{idt:"curium", name:lg("Curium", "Curium"), type:"legendary", value:new BigNum(1, 40), atoms:{Cm:1}, rarity:2},
+						berkelium:{idt:"berkelium", name:lg("Berkelium", "Berkelium"), type:"legendary", value:new BigNum(1, 60), atoms:{Bk:1}, rarity:3},
+						xylene:{idt:"xylene", name:lg("Xylene", "Xylène"), type:"transuniversal", value:new BigNum(1, 100), atoms:{Xy:1}, rarity:4},
+						paroxium:{idt:"paroxium", name:lg("Paroxium", "Paroxium"), type:"transuniversal", value:new BigNum(1, 200), atoms:{Px:1}, rarity:5}
+					};
+	for (st in unstableMetals) {
+		unstableMetals[st].vi = st.substr(0, 2);
+	}
+	unstableMetalsA = [[unstableMetals.uranium, unstableMetals.neptunium, unstableMetals.plutonium],
+					   [unstableMetals.americium, unstableMetals.curium, unstableMetals.berkelium],
+					   [unstableMetals.xylene, unstableMetals.paroxium]];
+
+	antiUnstableMetals = {	uranium:{idt:"uranium", name:lg("Antiuranium", "Antiuranium"), type:"ordinary", value:new BigNum(1, 400), atoms:{U:1}, rarity:0},
+							neptunium:{idt:"neptunium", name:lg("Antineptunium", "Antineptunium"), type:"ordinary", value:new BigNum(1, 500), atoms:{Np:1}, rarity:0},
+							plutonium:{idt:"plutonium", name:lg("Antiplutonium", "Antiplutonium"), type:"ordinary", value:new BigNum(1, 600), atoms:{Pt:1}, rarity:0},
+							americium:{idt:"americium", name:lg("Antiamericium", "Antiamericium"), type:"legendary", value:new BigNum(1, 1000), atoms:{Am:1}, rarity:2},
+							curium:{idt:"curium", name:lg("Anticurium", "Anticurium"), type:"legendary", value:new BigNum(1, 2000), atoms:{Cm:1}, rarity:2},
+							berkelium:{idt:"berkelium", name:lg("Antiberkelium", "Antiberkelium"), type:"legendary", value:new BigNum(1, 3000), atoms:{Bk:1}, rarity:3},
+							xylene:{idt:"xylene", name:lg("Antixylene", "Antixylène"), type:"transuniversal", value:new BigNum(1, 5000), atoms:{Xy:1}, rarity:4},
+							paroxium:{idt:"paroxium", name:lg("Antiparoxium", "Antiparoxium"), type:"transuniversal", value:new BigNum(1, 10000), atoms:{Px:1}, rarity:5}}
+
+	antiUnstableMetalsA = [[antiUnstableMetals.uranium, antiUnstableMetals.neptunium, antiUnstableMetals.plutonium],
+					   [antiUnstableMetals.americium, antiUnstableMetals.curium, antiUnstableMetals.berkelium],
+					   [antiUnstableMetals.xylene, antiUnstableMetals.paroxium]];
+
+	atoms = {	H:{name:lg("Hydrogen", "Hydrogène"), Z:1},
+				U:{name:lg("Uranium", "Uranium"), Z:92}};
+	for (st in atoms) {
+		atoms[st].vi = st;
+	}
+
+	particles = {	proton:{name:lg("Proton", "Proton")},
+					electron:{name:lg("Electron", "Electron")},
+					neutron:{name:lg("Neutron", "Neutron")}};
+	for (st in particles) {
+		particles[st].vi = st.substr(0, 2);
+	}
+ 	bldgs =		{PP:{type:"rsrc", name:lg("Power plant", "Centrale électrique"), frm:"PP", money:new BigNum(1.2, 2), energy:new BigNum(2, 4), time:50, stone:new BigNum(6, 1), materials:{coal:new BigNum(6.5, 2)}, stableMetals:{lead:new BigNum(2, 2)}, XP:new BigNum(1, 1), path1Value:{base:new BigNum(1.2, 2), exp:1.05}, path2Value:{base:new BigNum(1.5, 4), exp:1.052}, paths:3, upg1Cost:{base:new BigNum(1.5, 2), exp:1.06}, upg2Cost:{base:new BigNum(1.25, 2), exp:1.06}, upg3Cost:{base:new BigNum(2.5, 3), exp:1.06}},
+				ME:{type:"rsrc", name:lg("Mineral extractor", "Extracteur de minéraux"), frm:"ME", money:new BigNum(1, 2), energy:new BigNum(5, 4), time:40, stone:new BigNum(4, 1), materials:{}, stableMetals:{lead:new BigNum(3, 2), iron:new BigNum(2.5, 2)}, XP:new BigNum(6, 0), path1Value:{base:new BigNum(2, -1), exp:1.05}, path2Value:{base:new BigNum(2.5, 1), exp:1.052}, paths:3, upg1Cost:{base:new BigNum(1.25, 2), exp:1.06}, upg2Cost:{base:new BigNum(1, 2), exp:1.06}, upg3Cost:{base:new BigNum(2.5, 3), exp:1.06}},
+				GPP:{type:"rsrc", name:lg("Geothermal power plant", "Centrale géothermique"), frm:"GPP", money:new BigNum(1.5, 3), energy:new BigNum(6, 5), time:150, stone:new BigNum(1.2, 2), stableMetals:{iron:new BigNum(8, 2)}, XP: new BigNum(2.2, 1), paths:2},
+				SP:{type:"rsrc", name:lg("Solar panels", "Panneaux solaires"), frm:"SP", money:new BigNum(2.5, 3), energy:new BigNum(1.2, 5), time:150, stone:new BigNum(7.5, 1), materials:{glass:new BigNum(5, 2)}, stableMetals:{iron:new BigNum(1, 3), aluminium:new BigNum(1.5, 3)}, XP:new BigNum(2.2, 1), paths:2},
+				RL:{type:"rsrc", name:lg("Research lab", "Labo de recherche"), frm:"RL", money:new BigNum(1.5, 3), energy:new BigNum(2, 5), time:250, stone:new BigNum(1, 2), materials:{coal:new BigNum(1, 3)/*, glass:new BigNum(3, 3)*/}, stableMetals:{iron:new BigNum(1.5, 3), copper:new BigNum(1.2, 3)}, XP: new BigNum(5, 1), path1Value:{base:new BigNum(5, -2), exp:1.05}, upg1Cost:{base:new BigNum(1, 3), exp:1.06}, paths:1},
+
+				GF:{type:"resConv", name:lg("Glass factory", "Usine à verre"), frm:"GF", money:new BigNum(2.5, 3), energy:new BigNum(5, 5), time:220, stone:new BigNum(7.5, 1), stableMetals:{iron:new BigNum(3, 2), lead:new BigNum(4, 2), copper:new BigNum(2, 2)}, XP:new BigNum(4, 1), paths:2, path1Value:{base:new BigNum(1, 0), exp:1.05}, path2Value:{base:new BigNum(1, 0), exp:1.04}, upg1Cost:{base:new BigNum(8, 2), exp:1.06}, upg2Cost:{base:new BigNum(1.4, 3), exp:1.1}},
+				SE:{type:"resConv", name:lg("Steam engine", "Turbine à vapeur"), frm:"SE", money:new BigNum(2, 3), energy:new BigNum(5, 5), time:200, stone:new BigNum(1, 2), stableMetals:{iron:new BigNum(4, 2), lead:new BigNum(4, 2), copper:new BigNum(1.5, 2)}, XP:new BigNum(4, 1), paths:2, path1Value:{base:new BigNum(5, 0), exp:1.05}, path2Value:{base:new BigNum(5, 1), exp:1.04}, upg1Cost:{base:new BigNum(8, 2), exp:1.06}, upg2Cost:{base:new BigNum(1.4, 3), exp:1.1}},
+				PC:{type:"resConv", name:lg("Particle combiner", "Combinateur de particules"), frm:"PC", money:new BigNum(1, 10), energy:new BigNum(5.5, 13), time:12000, stone:new BigNum(3.5, 2), materials:{coal:new BigNum(8, 6)}, stableMetals:{silver:new BigNum(2, 3)}, XP:new BigNum(5, 6), paths:1},
+				AFS:{type:"resConv", name:lg("Atom fission system", "Système de fission d'atomes"), frm:"AFS", money:new BigNum(2, 9), energy:new BigNum(9, 11), time:8000, stone:new BigNum(3.5, 2), materials:{coal:new BigNum(1, 6)}, stableMetals:{silver:new BigNum(2, 3)}, XP:new BigNum(1, 6), paths:1},
+
+				S:{name:lg("Shipyard", "Chantier spatial"), frm:"S", money:new BigNum(6, 3), energy:new BigNum(1, 6), time:240, stone:new BigNum(2.5, 2), materials:{coal:new BigNum(8, 3)}, stableMetals:{lead:new BigNum(7, 3), iron:new BigNum(5, 3)}, XP:new BigNum(2.5, 1), paths:3, upg1Cost:{base:new BigNum(4, 5), exp:2, max:6}, upg2Cost:{base:new BigNum(1.5, 3), exp:1.06}, upg3Cost:{base:new BigNum(1.5, 3), exp:1.06}, path2Value:{base:new BigNum(1, 0), exp:1.05}, path3Value:{base:new BigNum(1, 0), exp:1.05}},
+				PCB:{name:lg("Probe construction center", "Centre de constr. des sondes"), frm:"PCB", money:new BigNum(1.4, 14), energy:new BigNum(5, 16), time:20000, stone:new BigNum(6, 2), materials:{glass:new BigNum(7, 5)}, stableMetals:{gold:new BigNum(6.5, 3), aluminium:new BigNum(9, 5)}, XP:new BigNum(7, 7), paths:1},
+
+				MS:{name:lg("Mineral silo", "Silo à minéraux"), frm:"MS", money:new BigNum(1, 3), energy:new BigNum(1, 5), time:60, stone:new BigNum(1, 1), materials:{}, stableMetals:{lead:new BigNum(3.5, 2), iron:new BigNum(3, 2)}, XP:new BigNum(1.5, 1), path1Value:{base:new BigNum(2.5, 1), exp:1.052}, paths:1,upg1Cost:{base:new BigNum(2, 2), exp:1.06}},
+			 	PS:{name:lg("Particle storage", "Stockage des particules"), frm:"PS", money:new BigNum(1, 6), energy:new BigNum(6, 6), time:500, stone:new BigNum(3.5, 1), materials:{glass:new BigNum(4, 3)}, stableMetals:{}, XP:new BigNum(5, 3), paths:1},
+				MM:{name:lg("Mineral manipulator", "Manipulateur de minéraux"), frm:"MM", money:new BigNum(5, 6), energy:new BigNum(2.6, 7), time:2500, stone:new BigNum(6, 2), materials:{coal:new BigNum(1.1, 5)}, stableMetals:{lead:new BigNum(1, 4), iron:new BigNum(1, 4), silver:new BigNum(5, 2)}, XP:new BigNum(9, 3), paths:1}};
+
+	bldgsA = [[bldgs.PP, bldgs.ME, bldgs.GPP, bldgs.SP, bldgs.RL],
+			 [bldgs.GF, bldgs.SE, bldgs.PC, bldgs.AFS],
+			 [bldgs.S, bldgs.PCB],
+			 [bldgs.MS, bldgs.PS, bldgs.MM]];
+
+	scs = {spacecraft:{idt:"spacecraft", name:"Spacecraft", cost:new BigNum(1, 2), desc:"Unlocks the shipyard", prereq:-1},
+			spaceAgriculture:{idt:"spaceAgriculture", name:"Space agriculture", cost:new BigNum(2, 2), desc:"Allows you to grow basic plants", prereq:-1},
+			nuclearFusion:{idt:"nuclearFusion", name:"Nuclear fusion", cost:new BigNum(7.5, 3), desc:"Unlocks nuclear fusion buildings, the fusion reactor and nuclear missile launcher", prereq:0},
+			shipProtection:{idt:"shipProtection", name:"Ship protection", cost:new BigNum(3, 3), desc:"Unlocks Superconductive energy shield and Osmium armor", prereq:0},
+			thrusters:{idt:"thrusters", name:"Thrusters", cost:new BigNum(2, 3), desc:"Unlocks Thruster II and Advanced thruster II", prereq:0},
+			advancedElectromagnetism:{idt:"advancedElectromagnetism", name:"Advanced electromagnetism", cost:new BigNum(4, 3), desc:"Unlocks Green laser and Plasma emitter", prereq:0},
+			plantGrowthAcceleration:{idt:"plantGrowthAcceleration", name:"Plant growth acceleration", cost:new BigNum(3, 3), desc:"Allows you to use quartz to speed up plant growth", prereq:1},
+			gemstoneAgriculture:{idt:"gemstoneAgriculture", name:"Gemstone agriculture", cost:new BigNum(1, 4), desc:"Allows you to grow the 6 \"gem plants\"", prereq:1},
+			unstableMetalManipulation:{idt:"unstableMetalManipulation", name:"Unstable metal manipulation", cost:new BigNum(1.5, 5), desc:"Unlocks unstable metals", prereq:2},
+			atomManipulation:{idt:"atomManipulation", name:"Atom manipulation", cost:new BigNum(1.2, 5), desc:"Allows you to acquire atoms and convert them to metals, also unlocks Atomic bomb", prereq:2},
+			advancedShipProtection:{idt:"advancedShipProtection", name:"Advanced ship protection", cost:new BigNum(8, 4), desc:"Unlocks Ionized energy shield and Titanium armor", prereq:3},
+			FTLTechnology:{idt:"FTLTechnology", name:"FTL technology", cost:new BigNum(2, 5), desc:"Allows you to send ships to other star systems, also unlocks tier 3 thrusters", prereq:4},
+			blueLaser:{idt:"blueLaser", name:"Blue laser", cost:new BigNum(6, 4), desc:"Unlocks Blue laser", prereq:5},
+			platinideAgriculture:{idt:"platinideAgriculture", name:"Platinide agriculture", cost:new BigNum(6, 4), desc:"Allows you to grow platinide plants", prereq:7},
+			advancedParticlePhysics:{idt:"advancedParticlePhysics", name:"Advanced particle physics", cost:new BigNum(5, 6), desc:"Allows you to convert atoms into particles (and vice versa), also unlocks Hydrogen bomb", prereq:9},
+			gateTravel:{idt:"gateTravel", name:"Gate travel", cost:new BigNum(5, 6), desc:"Allows your ships to travel through gates", prereq:10},
+			UVLaser:{idt:"UVLaser", name:"UV laser", cost:new BigNum(1.5, 6), desc:"Unlocks UV laser", prereq:12},
+			plasmaSuperheating:{idt:"plasmaSuperheating", name:"Plasma superheating", cost:new BigNum(2.5, 6), desc:"Unlocks Superheated plasma emitter", prereq:5}};
+	scsA = [scs.spacecraft, scs.spaceAgriculture, scs.nuclearFusion, scs.shipProtection, scs.thrusters, scs.advancedElectromagnetism,
+			scs.plantGrowthAcceleration, scs.gemstoneAgriculture, scs.unstableMetalManipulation, scs.atomManipulation,
+			scs.advancedShipProtection, scs.FTLTechnology, scs.blueLaser, scs.platinideAgriculture,
+			scs.advancedParticlePhysics, scs.gateTravel, scs.UVLaser, scs.plasmaSuperheating];
