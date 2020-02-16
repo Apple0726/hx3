@@ -1,15 +1,33 @@
 import arcade
 
-arcade.open_window(1920, 1080, "Helixteus 3")
 
-arcade.set_background_color(arcade.color.BLACK)
+class MyGame(arcade.Window):
+    def __init__(self, width, height, title):
+        super().__init__(width, height, title)
 
-arcade.start_render()
+        arcade.set_background_color(arcade.color.BLACK)
 
-arcade.draw_circle_filled(900, 500, 70, arcade.color.RED)
+    def setup(self):
+        pass
 
-arcade.draw_circle_filled(900, 500, 60, arcade.color.GREEN)
+    def on_draw(self):
+        arcade.start_render()
+        arcade.draw_circle_filled(900, 500, 70, arcade.color.RED)
+        arcade.draw_circle_filled(900, 500, 60, arcade.color.GREEN)
 
-arcade.finish_render()
+    def on_update(self, delta):
+        pass
 
-arcade.run()
+
+def main():
+    """ Main method """
+    game = MyGame(1280, 720, "Helixteus 3")
+    game.setup()
+    arcade.run()
+
+
+if __name__ == "__main__":
+    main()
+
+
+
