@@ -12,7 +12,7 @@ class MyGame(arcade.Window):
 
     def on_draw(self):
         arcade.start_render()
-        arcade.draw_circle_filled(900, 500, 70, arcade.color.RED)
+        arcade.draw_circle_filled(800, 500, 70, arcade.color.RED)
         arcade.draw_circle_filled(900, 500, 60, arcade.color.GREEN)
 
     def on_update(self, delta):
