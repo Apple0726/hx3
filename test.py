@@ -1,10 +1,8 @@
 import arcade
 
-
-
 arcade.open_window(1920, 1080, "Helixteus 3")
 
-arcade.set_background_color(arcade.color.BLIZZARD_BLUE)
+arcade.set_background_color(arcade.color.BLACK)
 
 arcade.start_render()
 
