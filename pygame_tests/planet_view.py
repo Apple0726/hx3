@@ -14,6 +14,7 @@ class TileContainer:
         self.width = 5
         self.height = 5
         self.hover = (0, 0)
+        self.select = (0, 0)
 
     def append(self, sprite):
         self.tiles.append(sprite)
@@ -28,6 +29,12 @@ class TileContainer:
         my = (my - self.y) / self.scale
         self.hover = (mx//64, my//64)
 
+    def check_select(self, mx, my):
+        # convert to local mouse pos
+        mx = (mx - self.x) / self.scale
+        my = (my - self.y) / self.scale
+        self.select = (mx//64, my//64)
+
     def draw(self, screen):
         for x in range(self.width):
             for y in range(self.height):
@@ -39,8 +46,16 @@ class TileContainer:
             hover_y = 64 * self.hover[1] * self.scale + self.y
             hover_size = 64 * self.scale
             hover_surface = pygame.Surface((hover_size, hover_size), pygame.SRCALPHA)
-            hover_surface.fill((255, 255, 255, 100))
+            hover_surface.fill((255, 255, 255, 75))
             screen.blit(hover_surface, (hover_x, hover_y))
+
+        if 0 <= self.select[0] < self.width and 0 <= self.select[1] < self.height:
+            select_x = 64 * self.select[0] * self.scale + self.x
+            select_y = 64 * self.select[1] * self.scale + self.y
+            select_size = 64 * self.scale
+            select_surface = pygame.Surface((select_size, select_size), pygame.SRCALPHA)
+            select_surface.fill((255, 255, 255, 125))
+            screen.blit(select_surface, (select_x, select_y))
 
 
 class PlanetView:
@@ -59,6 +74,7 @@ class PlanetView:
         if event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1:
                 self.mouse_down = True
+                self.tiles.check_select(event.pos[0], event.pos[1])
         if event.type == pygame.MOUSEBUTTONUP:
             if event.button == 1:
                 self.mouse_down = False
