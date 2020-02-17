@@ -16,11 +16,7 @@ class TileContainer:
     def __init__(self):
         self.data = {
             "type" : random.randint(0, 1),
-            "towers" : [0, 0, 0, 0, 0,
-                        0, 1, 0, 0, 0,
-                        0, 0, 2, 0, 0,
-                        0, 0, 2, 1, 0,
-                        0, 0, 0, 0, 0]
+            "towers" : [random.randint(0, 2) for _ in range(25)]
         }
 
         self.scale = 2
