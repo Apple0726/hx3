@@ -1,13 +1,28 @@
 import math
+import random
 
 import pygame
 import pygame_gui
 
+images = {
+    "stone_tile" : pygame.image.load('img/tile.png'),
+    "amethyst_tile" : pygame.image.load('img/tile2.png'),
+    "tower_1" : pygame.image.load('img/tower.png'),
+    "tower_2" : pygame.image.load('img/tower2.png')
+}
 
-tile_png = pygame.image.load('img/tile.png')
 
 class TileContainer:
     def __init__(self):
+        self.data = {
+            "type" : random.randint(0, 1),
+            "towers" : [0, 0, 0, 0, 0,
+                        0, 1, 0, 0, 0,
+                        0, 0, 2, 0, 0,
+                        0, 0, 2, 1, 0,
+                        0, 0, 0, 0, 0]
+        }
+
         self.scale = 2
         self.x = 0
         self.y = 0
@@ -36,10 +51,24 @@ class TileContainer:
         self.select = (mx//64, my//64)
 
     def draw(self, screen):
+        if self.data["type"] == 0: tile_image = images["stone_tile"]
+        else: tile_image = images["amethyst_tile"]
+
         for x in range(self.width):
             for y in range(self.height):
-                image = pygame.transform.scale(tile_png, (math.ceil(64 * self.scale), math.ceil(64 * self.scale)))
-                screen.blit(image, (self.x + x*64*self.scale, self.y + y*64*self.scale))
+                index = x + y * self.width
+
+                tile_surface = pygame.transform.scale(tile_image, (math.ceil(64 * self.scale), math.ceil(64 * self.scale)))
+                screen.blit(tile_surface, (self.x + x*64*self.scale, self.y + y*64*self.scale))
+
+                if self.data["towers"][index] > 0:
+                    if self.data["towers"][index] == 1:
+                        tower_image = images["tower_1"]
+                    else:
+                        tower_image = images["tower_2"]
+
+                    tower_surface = pygame.transform.scale(tower_image, (math.ceil(64 * self.scale), math.ceil(64 * self.scale)))
+                    screen.blit(tower_surface, (self.x + x * 64 * self.scale, self.y + y * 64 * self.scale))
 
         if 0 <= self.hover[0] < self.width and 0 <= self.hover[1] < self.height:
             hover_x = 64 * self.hover[0] * self.scale + self.x
